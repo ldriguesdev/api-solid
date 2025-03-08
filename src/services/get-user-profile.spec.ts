@@ -19,14 +19,14 @@ describe('Get User Profile Service', () => {
       userId: createdUser.id,
     })
 
-    expect(user.name).toEqual('John Doe')
+    await expect(user.name).toEqual('John Doe')
   })
 
   it('should not be able to get user profile with wrong id', async () => {
     const usersRepository = new InMemoryUsersRepository()
     const sut = new GetUserProfileService(usersRepository)
 
-    expect(() =>
+    await expect(() =>
       sut.execute({
         userId: 'non-existing-id',
       }),
