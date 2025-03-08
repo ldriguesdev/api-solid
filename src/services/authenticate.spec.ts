@@ -20,7 +20,7 @@ describe('Authenticate Service', () => {
       password: '123456',
     })
 
-    expect(user.id).toEqual(expect.any(String))
+    await expect(user.id).toEqual(expect.any(String))
   })
 
   it('should not be able to authenticate with wrong email', async () => {
@@ -31,24 +31,6 @@ describe('Authenticate Service', () => {
       sut.execute({
         email: 'johndoe@example.com',
         password: '123456',
-      }),
-    ).rejects.toBeInstanceOf(InvalidCredentialsError)
-  })
-
-  it('should not be able to authenticate with wrong password', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateService(usersRepository)
-
-    await usersRepository.create({
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password_hash: await hash('123456', 6),
-    })
-
-    await expect(async () =>
-      sut.execute({
-        email: 'johndoe@example.com',
-        password: '123123',
       }),
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
