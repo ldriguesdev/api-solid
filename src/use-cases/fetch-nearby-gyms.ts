@@ -10,11 +10,18 @@ interface FetchNearByGymsUseCaseResponse {
   gyms: Gym[]
 }
 
-class FetchNearByGymsUseCase {
-  constructor(gymsRepository: IGymsRepository) {}
+export class FetchNearByGymsUseCase {
+  constructor(private gymsRepository: IGymsRepository) {}
 
   async execute({
     userLatitude,
     userLongitude,
-  }: FetchNearByGymsUseCaseRequest) {}
+  }: FetchNearByGymsUseCaseRequest): Promise<FetchNearByGymsUseCaseResponse> {
+    const gyms = await this.gymsRepository.findManyNearby({
+      latitude: userLatitude,
+      longitude: userLongitude,
+    })
+
+    return { gyms }
+  }
 }
