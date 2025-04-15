@@ -1,7 +1,7 @@
 import type { ICheckInsRepository } from '@/repositories/check-ins-repository'
 import type { IGymsRepository } from '@/repositories/gyms-repository'
 import type { CheckIn } from '@prisma/client'
-import { ResourceNotFoundError } from './errors/resource-not-found-erros'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinates'
 import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins'
 import { MaxDistanceError } from './errors/max-distance-error'
